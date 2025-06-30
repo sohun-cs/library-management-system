@@ -7,7 +7,7 @@ export const borrowRoutes = express.Router();
 
 
 // Create a borrowed request
-borrowRoutes.post("/borrow", async (req: Request, res: Response) => {
+borrowRoutes.post("/", async (req: Request, res: Response) => {
     try {
 
         const body = req.body;
@@ -34,7 +34,7 @@ borrowRoutes.post("/borrow", async (req: Request, res: Response) => {
 
 
 // Get all the borrowed information
-borrowRoutes.get("/borrow", async (req: Request, res: Response) => {
+borrowRoutes.get("/", async (req: Request, res: Response) => {
     try {
         const borrowedBooksData = await Borrow.aggregate([
             {

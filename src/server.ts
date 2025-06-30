@@ -5,20 +5,18 @@ require("dotenv").config();
 
 let server: Server;
 
-
 async function main() {
-
     try {
+        await mongoose.connect(`${process.env.DB_CONN}`);
+        console.log("Connected to MongoDB");
 
-        server = app.listen(process.env.DB_PORT, async () => {
-            await mongoose.connect(`${process.env.DB_CONN}`);
-            console.log(`Server is running on ${process.env.DB_PORT}`)
-        })
-
+        server = app.listen(process.env.DB_PORT, () => {
+            console.log(`Server is running on port ${process.env.DB_PORT}`);
+        });
     } catch (error) {
-        console.error(error)
+        console.error("MongoDB connection error:", error);
+        process.exit(1);
     }
-
 }
 
 main();

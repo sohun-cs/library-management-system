@@ -5,7 +5,7 @@ export const bookRoutes = express.Router();
 
 
 // Create Book
-bookRoutes.post('/books', async (req: Request, res: Response) => {
+bookRoutes.post('/', async (req: Request, res: Response) => {
 
     try {
         const body = req.body;
@@ -26,16 +26,16 @@ bookRoutes.post('/books', async (req: Request, res: Response) => {
         });
 
         if (error.code === 11000) res.status(400).json({
-                message: 'This ISBN already exists',
-                success: false,
-                error: error.keyValue,
-            });
+            message: 'This ISBN already exists',
+            success: false,
+            error: error.keyValue,
+        });
 
 
         res.status(500).json({
             message: 'Something went wrong',
             success: false,
-            error: error.message,
+            error: error,
         });
 
 
@@ -44,7 +44,7 @@ bookRoutes.post('/books', async (req: Request, res: Response) => {
 });
 
 // Get all books
-bookRoutes.get('/books', async (req: Request, res: Response) => {
+bookRoutes.get('/', async (req: Request, res: Response) => {
     try {
 
         const { filter, sortBy = 'createdAt', sort = 'desc', limit = '10' } = req.query;
@@ -77,7 +77,7 @@ bookRoutes.get('/books', async (req: Request, res: Response) => {
 
 
 // Get a book by ID
-bookRoutes.get('/books/:bookId', async (req: Request, res: Response) => {
+bookRoutes.get('/:bookId', async (req: Request, res: Response) => {
     try {
         const bookId = req.params.bookId;
 
@@ -102,7 +102,7 @@ bookRoutes.get('/books/:bookId', async (req: Request, res: Response) => {
 
 
 // Update a book information by ID
-bookRoutes.put('/books/:bookId', async (req: Request, res: Response) => {
+bookRoutes.put('/:bookId', async (req: Request, res: Response) => {
     try {
 
         const bookId = req.params.bookId;
@@ -129,7 +129,7 @@ bookRoutes.put('/books/:bookId', async (req: Request, res: Response) => {
 
 
 // Delete a book by ID
-bookRoutes.delete('/books/:bookId', async (req: Request, res: Response) => {
+bookRoutes.delete('/:bookId', async (req: Request, res: Response) => {
 
     try {
 

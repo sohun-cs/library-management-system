@@ -8,8 +8,8 @@ const app = express();
 app.use(cors({ origin: ['http://localhost:3000'] }));
 app.use(express.json());
 
-app.use('/api', bookRoutes);
-app.use('/api', borrowRoutes);
+app.use('/api/books', bookRoutes);
+app.use('/api/borrow', borrowRoutes);
 
 app.get("/", async (req: Request, res: Response) => {
     res.send("Welcome to Library Management");
